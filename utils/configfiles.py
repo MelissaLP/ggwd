@@ -52,7 +52,6 @@ def read_ini_config(file_path):
     # Read the variable_arguments and static_arguments using the parser
     variable_arguments, static_arguments = \
         read_params_from_config(workflow_config_parser)
-    
     # Typecast and amend the static arguments
     static_arguments = typecast_static_args(static_arguments)
     static_arguments = amend_static_args(static_arguments)

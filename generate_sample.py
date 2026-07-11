@@ -66,7 +66,7 @@ if __name__ == '__main__':
     # -------------------------------------------------------------------------
 
     # Disable output buffering ('flush' option is not available for Python 2)
-    sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
+    #sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
 
     # Start the stopwatch
     script_start = time.time()
@@ -111,6 +111,7 @@ if __name__ == '__main__':
     # Build the full path to the waveform params file
     ini_config_name = config['waveform_params_file_name']
     ini_config_path = os.path.join('.', 'config_files', ini_config_name)
+    print(ini_config_path)
 
     # Read in the variable_arguments and static_arguments
     print('Reading and validating in INI configuration file...', end=' ')

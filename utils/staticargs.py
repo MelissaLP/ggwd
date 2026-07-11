@@ -76,6 +76,7 @@ def typecast_static_args(static_args):
     args = copy.deepcopy(static_args)
 
     # Cast variables to integer that need to be integers
+    print(args)
     args['bandpass_lower'] = int(args['bandpass_lower'])
     args['bandpass_upper'] = int(args['bandpass_upper'])
     args['waveform_length'] = int(args['waveform_length'])
