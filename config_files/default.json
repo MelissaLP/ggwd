@@ -5,8 +5,8 @@
   "inj_bits": [0, 1, 2, 4],
   "waveform_params_file_name": "waveform_params.ini",
   "max_runtime": 60,
-  "n_injection_samples": 32,
-  "n_noise_samples": 16,
+  "n_injection_samples": 1,
+  "n_noise_samples": 1,
   "n_processes": 4,
   "output_file_name": "default.hdf"
 }
