@@ -66,7 +66,7 @@ def generate_sample(static_arguments,
     # Read out frequency-related arguments
     original_sampling_rate = static_arguments['original_sampling_rate']
     target_sampling_rate = static_arguments['target_sampling_rate']
-    f_lower = static_arguments['f_lower']
+    low_frequency_cutoff = static_arguments['low_frequency_cutoff']
     delta_f = static_arguments['delta_f']
     fd_length = static_arguments['fd_length']
 
@@ -92,7 +92,7 @@ def generate_sample(static_arguments,
         # TODO: Is this the best choice for this task?
         psd = aLIGOZeroDetHighPower(length=fd_length,
                                     delta_f=delta_f,
-                                    low_freq_cutoff=f_lower)
+                                    low_freq_cutoff=low_frequency_cutoff)
 
         # Actually generate the noise using the PSD and LALSimulation
         noise = dict()
@@ -178,7 +178,7 @@ def generate_sample(static_arguments,
             # filtering SNR for this injection and this detector
             snrs[det] = sigma(htilde=detector_signals[det],
                               psd=psds[det],
-                              low_frequency_cutoff=f_lower)
+                              low_frequency_cutoff=low_frequency_cutoff)
 
         # Calculate the network optimal matched filtering SNR for this
         # injection (which we need for scaling to the chosen injection SNR)
@@ -199,6 +199,7 @@ def generate_sample(static_arguments,
         target_distance = waveform_params['chirp_distance'] * ((mchirp / mchirp_ref) ** (5.0 / 6.0))
         
         # PyCBC's get_waveform generated the template at this default distance (1.0 Mpc)
+        # Note that we removed ggwd distance = 100
         nominal_distance = waveform_params.get('distance', 1.0)
         
         # Amplitude scales inversely with distance (1 / d)

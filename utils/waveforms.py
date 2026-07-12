@@ -204,12 +204,12 @@ def get_waveform(static_arguments,
 
     # Collect all the required parameters for the simulation from the given
     # static and variable parameters
-    print(waveform_params)
+    # FIXME: 
     simulation_parameters = dict(approximant=static_arguments['approximant'],
                                  coa_phase=waveform_params['coa_phase'],
                                  delta_f=static_arguments['delta_f'],
                                  delta_t=static_arguments['delta_t'],
-                                 distance=static_arguments['distance'],
+                                 f_ref=static_arguments['f_ref'],
                                  f_lower=static_arguments['f_lower'],
                                  inclination=waveform_params['inclination'],
                                  mass1=waveform_params['mass1'],
