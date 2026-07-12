@@ -21,6 +21,7 @@ from pycbc.detector import Detector
 from pycbc.types.timeseries import TimeSeries
 
 
+
 # -----------------------------------------------------------------------------
 # CLASS DEFINITIONS
 # -----------------------------------------------------------------------------
@@ -203,6 +204,7 @@ def get_waveform(static_arguments,
 
     # Collect all the required parameters for the simulation from the given
     # static and variable parameters
+    print(waveform_params)
     simulation_parameters = dict(approximant=static_arguments['approximant'],
                                  coa_phase=waveform_params['coa_phase'],
                                  delta_f=static_arguments['delta_f'],
@@ -212,8 +214,8 @@ def get_waveform(static_arguments,
                                  inclination=waveform_params['inclination'],
                                  mass1=waveform_params['mass1'],
                                  mass2=waveform_params['mass2'],
-                                 spin1z=waveform_params['spin1z'],
-                                 spin2z=waveform_params['spin2z'])
+                                 spin1z=static_arguments['spin1z'],
+                                 spin2z=static_arguments['spin2z'])
 
     # Perform the actual simulation with the given parameters
     h_plus, h_cross = simulate_waveform(**simulation_parameters)

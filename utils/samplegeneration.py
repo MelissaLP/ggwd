@@ -19,6 +19,7 @@ from pycbc.filter import sigma
 
 from .hdffiles import get_strain_from_hdf_file
 from .waveforms import get_detector_signals, get_waveform
+from pycbc.conversions import mchirp_from_mass1_mass2
 
 
 # -----------------------------------------------------------------------------
@@ -188,8 +189,20 @@ def generate_sample(static_arguments,
         # ---------------------------------------------------------------------
 
         # Compute the rescaling factor
-        injection_snr = waveform_params['injection_snr']
-        scale_factor = 1.0 * injection_snr / nomf_snr
+        # injection_snr = waveform_params['injection_snr']
+        # scale_factor = 1.0 * injection_snr / nomf_snr
+
+        mchirp = mchirp_from_mass1_mass2(waveform_params['mass1'], waveform_params['mass2'])
+        mchirp_ref = mchirp_from_mass1_mass2(1.4, 1.4)
+        
+        # Convert the drawn chirp_distance into the true physical distance
+        target_distance = waveform_params['chirp_distance'] * ((mchirp / mchirp_ref) ** (5.0 / 6.0))
+        
+        # PyCBC's get_waveform generated the template at this default distance (1.0 Mpc)
+        nominal_distance = waveform_params.get('distance', 1.0)
+        
+        # Amplitude scales inversely with distance (1 / d)
+        scale_factor = nominal_distance / target_distance
 
         strain = {}
         for det in ('H1', 'L1'):
@@ -205,7 +218,9 @@ def generate_sample(static_arguments,
         # ---------------------------------------------------------------------
 
         # Store the information we have computed ourselves
-        injection_parameters = {'scale_factor': scale_factor,
+        # FIXME: I am adding chirp_distance for reference later.
+        injection_parameters = {'chirp_distance': waveform_params['chirp_distance'],
+                                'scale_factor': scale_factor,
                                 'h1_snr': snrs['H1'],
                                 'l1_snr': snrs['L1']}
 
