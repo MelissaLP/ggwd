@@ -1,0 +1,18 @@
+# HTCondor submission file
+# Resource requests
++UseOS           = "el9"
++JobCategory     = "medium"
+request_memory   = 8000
+request_disk     = 8000
+request_cpus     = 4
+
+# Executable
+executable       = /data/gravwav/lopezm/Projects/EuCAIF/ggwd/subfiles/condor.sh
+
+# Logs and I/O
+log              = /data/gravwav/lopezm/Projects/EuCAIF/ggwd/subfiles/gen_data.log
+output           = /data/gravwav/lopezm/Projects/EuCAIF/ggwd/subfiles/gen_data.out
+error            = /data/gravwav/lopezm/Projects/EuCAIF/ggwd/subfiles/gen_data.err
+
+# Queue the job
+queue 1

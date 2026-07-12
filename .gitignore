@@ -1,3 +1,8 @@
+*.log
+*.err
+*.out
+*.nfs*
+
 # Local versions of files (e.g., config files)
 *.local.*
 
