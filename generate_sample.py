@@ -85,6 +85,8 @@ if __name__ == '__main__':
                         help='Name of the JSON configuration file which '
                              'controls the sample generation process.',
                         default='default.json')
+    parser.add_argument('--path-to-repo',
+                        help='Path to the repository containing the configuration files.')
 
     # Parse the arguments that were passed when calling this script
     print('Parsing command line arguments...', end=' ')
@@ -97,8 +99,8 @@ if __name__ == '__main__':
 
     # Build the full path to the config file
     json_config_name = command_line_arguments['config_file']
-    json_config_path = os.path.join('.', 'config_files', json_config_name)
-    
+    json_config_path = os.path.join(command_line_arguments['path_to_repo'], 'config_files', json_config_name)
+
     # Read the JSON configuration into a dict
     print('Reading and validating in JSON configuration file...', end=' ')
     config = read_json_config(json_config_path)
@@ -110,7 +112,7 @@ if __name__ == '__main__':
 
     # Build the full path to the waveform params file
     ini_config_name = config['waveform_params_file_name']
-    ini_config_path = os.path.join('.', 'config_files', ini_config_name)
+    ini_config_path = os.path.join(command_line_arguments['path_to_repo'], 'config_files', ini_config_name)
     print(ini_config_path)
 
     # Read in the variable_arguments and static_arguments
@@ -417,7 +419,7 @@ if __name__ == '__main__':
         sample_file_dict['injection_parameters'][key] = value
 
     # Construct the path for the output HDF file
-    output_dir = os.path.join('.', 'output')
+    output_dir = os.path.join(command_line_arguments['path_to_repo'], 'output')
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
     sample_file_path = os.path.join(output_dir, config['output_file_name'])
@@ -439,7 +441,7 @@ if __name__ == '__main__':
 
     # PyCBC always create a copy of the waveform parameters file, which we
     # can delete at the end of the sample generation process
-    duplicate_path = os.path.join('.', config['waveform_params_file_name'])
+    duplicate_path = os.path.join(command_line_arguments['path_to_repo'], config['waveform_params_file_name'])
     if os.path.exists(duplicate_path):
         os.remove(duplicate_path)
 
