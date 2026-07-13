@@ -1,9 +1,9 @@
 # Mock Data Set
 
-This small data set contains 1k noise and 1k noise + signal of 2s at 2048 Hz sampling frequency. Currently, it is stored here.
+This small data set contains 1k noise and 1k noise + signal of 2s at 2048 Hz sampling frequency. Currently, it is stored [here](https://surfdrive.surf.nl/s/XDZ4mSCeYDxsi45).
 
 ```text
-📁 root.h5
+📁 default.hdf
 │
 ├── 📁 injection_parameters
 │   ├── 📄 chirp_distance: The luminosity distance scaled by the system's chirp mass, dictating absolute amplitude.
