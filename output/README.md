@@ -1,7 +1,9 @@
 # Mock Data Set
 
+This small data set contains 1k noise and 1k noise + signal of 2s at 2048 Hz sampling frequency. Currently, it is stored here.
 
-📁 default.hdf
+```text
+📁 root.h5
 │
 ├── 📁 injection_parameters
 │   ├── 📄 chirp_distance: The luminosity distance scaled by the system's chirp mass, dictating absolute amplitude.
@@ -32,4 +34,5 @@
 │   └── 📄 [metadata]: Calibration scalars (mean, std dev) used to standardize or whiten input tensors before training.
 │
 └── 📁 static_arguments
-    └── 📄 [metadata]: Configuration constants tracking sampling rate, frequency cutoffs, and window durations. # FIXME: I think it is empty
+    └── 📄 [metadata]: Configuration constants tracking sampling rate, frequency cutoffs, and window durations.
+```
